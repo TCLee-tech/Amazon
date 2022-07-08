@@ -32,7 +32,7 @@ made up of 3 tables:
 	
 #### Microservices
 To-be microservice Compute is a basket of 3 serverless AWS Lambda functions.<br>
- Shopping cart functionality broken into 3 distinct microservices, handling 3 business logics
+Shopping cart functionality broken into 3 distinct microservices, handling 3 business logics
 - add unicorn to chart
 - remove unicorn from cart
 - get cart of unicorn/s <br>
@@ -44,7 +44,7 @@ API Gateway will route traffic to microservice based on HTTP method. <br>
 	</ul>
 <hr>
 
-There are 2 options to connect frontend and backend: **Refactor Spaces** or **API Gateway**. <br>
+There are 2 options to connect frontend and backend: **Refactor Spaces** or **API Gateway**. 
 
 1. Amazon Migration Hub Refactor Spaces
 
@@ -56,8 +56,7 @@ There are 2 options to connect frontend and backend: **Refactor Spaces** or **AP
 	- each microservice (e.g. shopping cart) to be in own account, managed by separate team.
 	- Refactor Spaces 1 management account.
 <br>
-2. Frontend S3 traffic -> Amazon API Gateway -> network load balancer -> AWS Transit Gateway -> backend.
-<br>
+2. Frontend S3 traffic => Amazon API Gateway -> network load balancer -> AWS Transit Gateway -> backend.
 
 - API Gateway allows you to define resources and methods
 - API Transit Gateway bridges private endpoints of services in VPC
