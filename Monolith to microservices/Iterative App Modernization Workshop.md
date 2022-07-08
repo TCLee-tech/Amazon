@@ -42,26 +42,29 @@ API Gateway will route traffic to microservice based on HTTP method. <br>
 	<ul> 
 		<li>add = POST, remove = DELETE, get = GET.
 	</ul>
-
 <hr>
-There are 2 options to connect frontend and backend: **Refactor Spaces** or **API Gateway**.
-<br>
+
+There are 2 options to connect frontend and backend: **Refactor Spaces** or **API Gateway**. <br>
+
 1. Amazon Migration Hub Refactor Spaces
+
 - orchestra networking and re-route shopping cart traffic to microservice.
-- frontend -> Refactor Space Proxy (single endpoint that routes traffic to multiple different backend services based on rules) -> Refactor Spaces Services (services that provide application's business capabilities - legacy service and shopping cart service)
+- frontend -> Refactor Space Proxy (single endpoint that routes traffic to multiple different backend services based on rules) -> Refactor Spaces Services (two services that provide application's business capabilities - legacy service and shopping cart service)
 - Refactor Spaces enable account level isolation of services. Achieved by bridged VPCs and proxies that communicate via private IP addresses.
-	- best practice: 
+	Best practice: 
 	- legacy app 1 account.
-	- each microservice (shopping cart) to be in own account, managed by seperate team.
-	- Refactor Spaces management account.
+	- each microservice (e.g. shopping cart) to be in own account, managed by separate team.
+	- Refactor Spaces 1 management account.
+<br>
+2. Frontend S3 traffic -> Amazon API Gateway -> network load balancer -> AWS Transit Gateway -> backend.
+<br>
 
+- API Gateway allows you to define resources and methods
+- API Transit Gateway bridges private endpoints of services in VPC
+- the use of API Gateway allows the use of GraphQL (https://aws.amazon.com/graphql/). Access many schema/data sources, pull from multiple different microservices with single request.
 
-2. Frontend S3 traffic -> Amazon API Gateway -> network load balancer -> AWS Transit Gateway -> backend
-	- API Gateway allows you to define resources and methods
-	- API Transit Gateway bridge private endpoints of services in VPC
-	- the use of API Gateway allows the use of GraphQL (https://aws.amazon.com/graphql/). Access many schema/data sources, pull from multiple different microservices with single request.
-
-Cloud formation to define infrastructure resources as a code. yaml template file. Can configure, version, deploy, scale/repeat.
+**Cloud formation** to define infrastructure resources as a code. yaml template file. Can configure, version, deploy, scale/repeat.
+<hr>
 
 Some considereations when migrating to microservices:
  - microservice stack: how to implement? Cloud Functions? Kubernetes?
@@ -80,7 +83,7 @@ Migration to microservices-based architecture using strangler pattern (https://m
 	- reverse migration back to monolith must be possible to reduce risk
 	- shorter release cycles
 
-Patterns of Enterprise Application Architecture
-https://martinfowler.com/books/eaa.html
-Errant Architectures
+Patterns of Enterprise Application Architecture<br>
+https://martinfowler.com/books/eaa.html <br>
+Errant Architectures<br>
 https://www.drdobbs.com/errant-architectures/184414966
