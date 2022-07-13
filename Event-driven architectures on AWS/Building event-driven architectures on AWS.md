@@ -53,11 +53,12 @@
 #### Step 3: Verify Step Functions workflow execution
 
 **Extra credit**
-Implement an event pattern using Prefix Matching  that matches events with a location the begins with eu-. Do not modify the Step Function target and verify backwards compatibility by reusing the sample data above. Modify the test data to use a location, eu-south, to verify that additional EU locations trigger execution of the Step Functions state machine.
+Implement an event pattern using _Prefix Matching_  that matches events with a location the begins with eu-. Do not modify the Step Function target and verify backwards compatibility by reusing the sample data above. Modify the test data to use a location, eu-south, to verify that additional EU locations trigger execution of the Step Functions state machine.
 https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns-content-based-filtering.html#filtering-prefix-matching
 
 Solution
 EventBridge -> Rules -> Event pattern:
+```
 {
   "detail": {
     "location": [{
@@ -65,13 +66,14 @@ EventBridge -> Rules -> Event pattern:
     }]
   }
 }
-
+```
 **Extra credit**
-Implement an event pattern using Prefix Matching  and Numeric Matching  that matches events with a location the begins with eu- AND an Order value greater than 1000. Do not modify the Step Function target and verify backwards compatibility by reusing the sample data above.
+Implement an event pattern using _Prefix Matching_  and _Numeric Matching_  that matches events with a location the begins with eu- AND an Order value greater than 1000. Do not modify the Step Function target and verify backwards compatibility by reusing the sample data above.
 https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns-content-based-filtering.html#filtering-numeric-matching
 
 Solution
 EventBridge -> Rules -> Event pattern:
+```
 {
   "detail": {
     "location": [{
@@ -82,14 +84,15 @@ EventBridge -> Rules -> Event pattern:
     }]
   }
 }
-
+```
 #### SNS Challenge
 **Extra credit**
-Implement an event pattern using Exists Matching  that matches events which do NOT require a signature (ie. signature does not exists). Do not modify the SNS target and verify backwards compatibility by reusing the sample data above.
+Implement an event pattern using _Exists Matching_  that matches events which do NOT require a signature (ie. signature does not exists). Do not modify the SNS target and verify backwards compatibility by reusing the sample data above.
 https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns-content-based-filtering.html#eb-filtering-exists-matching
 
 Solution
 EventBridge -> Rules -> Event pattern:
+```
 {
   "signature": [{"exists": false}],
   "detail": {
@@ -99,24 +102,25 @@ EventBridge -> Rules -> Event pattern:
     }]
   }
 }
-
+```
 **Extra credit**
-Implement an event pattern using Prefix Matching  and Anything-but Matching  that matches events with a location the begins with us- but NOT a location that is us-east. Do not modify the SNS target and verify backwards compatibility by reusing the sample data above.
+Implement an event pattern using _Prefix Matching_  and _Anything-but Matching_  that matches events with a location the begins with us- but NOT a location that is us-east. Do not modify the SNS target and verify backwards compatibility by reusing the sample data above.
 https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns-content-based-filtering.html#filtering-anything-but
 
 Solution
 EventBridge -> Rules -> Event pattern
+```
 {
   "detail":{
     "category":["lab-supplies"],
-    "location":[{"prefix":"us-"}, {"anything-but": "us-east"}] // not certain, doesn't seem to work..
+    "location":[{"prefix":"us-"}, {"anything-but": "us-east"}] // not certain, need both filters..
     }
 }
-
+```
 #### Amazon EventBridge Archive and Replay
 https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-archive.html
-- can record any event processed by any event bus
-- can record all events, or filter based on pattern matching logic (rules)
+- record any event processed by any event bus
+  - all events, or filter for subset based on pattern matching logic (rules)
 - can be used for testing after code fixes, validate new features using historical production data
 - Process: EventBridge create archive, have filter for events from xxx source ->  create EventBridge Rule with filter for replay-name attribute, target SQS Queue -> Start Replay -> validate messages received in SQS
 
@@ -140,7 +144,7 @@ https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-archive.html
     - Steps:
         1. create SQS Queue
         2. from created SQS Queue, subscribe to SNS topic of interest
-        3. from SNS Topic, select the subscription from SQS. Edit subscription filter policy to add required JSON key-value attribute. Only messages with matching key-value pair will be received at SQS.
+        3. from SNS Topic, select the subscription from SQS. Edit subscription filter policy to add required JSON key-value attribute. Only messages with matching key-value pair will be received at SQS.<br>
         https://docs.aws.amazon.com/sns/latest/dg/sns-subscription-filter-policies.html
   - error handling
     - Dead-Letter Queues (DLQ) exist for SNS, SQS and Lambda
