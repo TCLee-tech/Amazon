@@ -15,3 +15,6 @@ https://github.com/aquasecurity/kube-hunter
 #### Trivy
 https://aquasecurity.github.io/trivy/v0.31.2/ </br>
 https://github.com/aquasecurity/trivy
+
+ECS \
+https://ecsworkshop.com/introduction/
