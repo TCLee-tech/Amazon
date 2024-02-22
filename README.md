@@ -5,19 +5,3 @@ cloud-native</br>
 
 ECS \
 https://ecsworkshop.com/introduction/
-
-
-<hr>
-
-### Container Security (not Amazon)
-#### [Kube-bench](https://github.com/aquasecurity/kube-bench)
- - https://blog.aquasec.com/announcing-kube-bench-an-open-source-tool-for-running-kubernetes-cis-benchmark-tests
-#### [Kube-hunter](https://kube-hunter.aquasec.com)
- - https://github.com/aquasecurity/kube-hunter
- - not under active development
-#### [Trivy](https://aquasecurity.github.io/trivy/v0.31.2/)
- - https://github.com/aquasecurity/trivy
-#### [Tracee](https://github.com/aquasecurity/tracee)  
-- [eBPF](https://ebpf.io/what-is-ebpf/) runs codes in Linux kernel
-- open-source eBPF tool for runtime security observability
-- run as daemon set and pod in every node
