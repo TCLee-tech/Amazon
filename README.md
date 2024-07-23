@@ -5,3 +5,9 @@ cloud-native</br>
 
 ECS \
 https://ecsworkshop.com/introduction/
+
+[Karpenter](https://karpenter.sh)
+  - cluster auto-scaler, directly manage AWS instance types
+  - In practice, good for AWS only. Benefit only with point above.
+  - manage NodePools (custom resource)
+  - scheduling, constraints(taint/toleration/affinity), node consolidation/optimisation.
